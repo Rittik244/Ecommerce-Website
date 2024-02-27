@@ -1,9 +1,17 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { useDataContext } from "../context/ContextProvider";
+import Loading from "./Loading";
 
 const ProductImage = ({ imgs = [{ url: "" }]  }) => {
 
+    const {isLoading} = useDataContext();
+
     const [mainImage, setMainImage] = useState(imgs[0]);
+
+    if(isLoading){
+        return <Loading />
+    }
 
     return (
         <Wrapper>
@@ -24,7 +32,7 @@ const ProductImage = ({ imgs = [{ url: "" }]  }) => {
                     })
                 }
             </div>
-
+            
             <div className="main-screen">
                 <img src={mainImage.url} alt={mainImage.filename} />
             </div>

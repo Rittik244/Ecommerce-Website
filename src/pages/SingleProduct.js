@@ -7,6 +7,7 @@ import ProductImage from "../components/ProductImage";
 import FormatPrice from "../Helper/FormatPrice";
 import PageNavigation from "../components/PageNavigation";
 import StarRating from "../components/StarRating";
+import AddToCart from "../components/AddToCart";
 
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 import { MdOutlineSecurity } from "react-icons/md";
@@ -93,9 +94,10 @@ const SingleProduct = () => {
                     </span>
                   </p>
                   <p>ID : <span> {id}</span></p>
-                  <p>Brand : <span> {company}</span></p>
+                  <p>Brand : <span style={{textTransform: "capitalize"}}> {company}</span></p>
                 </div>
                 <hr />
+                {stock > 0 && <AddToCart product={singleProduct} />}
               </div>
             </div>
           </div>
@@ -161,12 +163,13 @@ const Wrapper = styled.section`
      }
      hr {
        max-width: 100%;
-       width: 90%;
+       width: 100%;
        /* height: 0.2rem; */
        border: 0.1rem solid #000;
        color: red;
      }
    }
+
    .product-images {
      display: flex;
      justify-content: center;
