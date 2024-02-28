@@ -3,16 +3,9 @@ import styled from "styled-components";
 import ProductFilterSection from "../components/ProductFilterSection";
 import ProductSorting from "../components/ProductSorting";
 import ProductsList from "../components/ProductsList";
-import { useFilterContext } from "../context/FilterContext";
 
 const Products = () => {
   document.title = "Products - EcomSite";
-
-  const { filter_products } = useFilterContext();
-  console.log(
-    "🚀 ~ file: Products.js:12 ~ Products ~ filter_products:",
-    filter_products
-  );
 
   return (
     <Wrapper>

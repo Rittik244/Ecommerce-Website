@@ -1,24 +1,26 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaStar, FaCartShopping } from "react-icons/fa6";
+import { FaCartShopping } from "react-icons/fa6";
 import styled from "styled-components";
 import FormatPrice from "../Helper/FormatPrice";
 
-// ?=============================================================================================================
+// ? ===========================================================================
 // ! For Stars & Reviews Object
+
 // import { useDataContext } from "../context/ContextProvider";
 // import StarRating from "./StarRating";
-// ?=============================================================================================================
+
+// ? ===========================================================================
 
 const Product = (ele) => {
   const { id, name, image, price, category, company } = ele;
 
-  // ?=========================================================================================================
+  // ? =========================================================================
   // ! we don't need {useDataContext} in this component, only imported because of {stars} and {reviews} object
   // const { singleProduct} = useDataContext();
 
   // const {stars, reviews} = singleProduct;
-  // ?=========================================================================================================
+  // ? =========================================================================
 
   return (
     <Wrapper>
@@ -33,11 +35,6 @@ const Product = (ele) => {
             <h5 className="common-desc">{name}</h5>
             {/* <div className="star common-desc">
                             <StarRating stars={stars} reviews={reviews} />
-                            <FaStar className="star-icon" />
-                            <FaStar className="star-icon" />
-                            <FaStar className="star-icon" />
-                            <FaStar className="star-icon" />
-                            <FaStar className="star-icon" />
                         </div> */}
             <h4 className="common-desc">
               <FormatPrice price={price} />
