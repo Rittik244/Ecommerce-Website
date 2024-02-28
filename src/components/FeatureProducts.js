@@ -11,26 +11,21 @@ const FeatureProducts = () => {
   //   return <Loading />;
   // }
 
-
   return (
     <Wrapper className="section">
-      {
-        isLoading ? (
-          <Loading />
-        ) : (
-          <div className="container">
-            {/* <div className="intro-data">Check Now!</div> */}
-            <div className="common-heading">Feature Products</div>
-            <div className="grid grid-three-column" /* className="con" */ >
-              {
-                featureProducts.map((ele) => {
-                  return <Product key={ele.id} {...ele} />
-                })
-              }
-            </div>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="container">
+          {/* <div className="intro-data">Check Now!</div> */}
+          <div className="common-heading">Feature Products</div>
+          <div className="grid grid-three-column" /* className="con" */>
+            {featureProducts.map((ele) => {
+              return <Product key={ele.id} {...ele} />;
+            })}
           </div>
-        )
-      }
+        </div>
+      )}
     </Wrapper>
   );
 };
@@ -39,7 +34,7 @@ const Wrapper = styled.section`
   padding: 8rem;
   background-color: ${({ theme }) => theme.colors.bg};
 
-  .common-heading{
+  .common-heading {
     text-align: center;
   }
 
@@ -47,9 +42,7 @@ const Wrapper = styled.section`
     max-width: 120rem;
   }
 
-  
-      
-      /* figure {
+  /* figure {
         width: auto;
         display: flex;
         justify-content: center;

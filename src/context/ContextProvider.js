@@ -6,19 +6,17 @@ const DataContext = createContext();
 
 const API = "https://api.pujakaitem.com/api/products";
 
+const initialState = {
+  isLaoding: false,
+  isError: false,
+  products: [],
+  featureProducts: [],
+  isSingleLoading: false,
+  singleProduct: {},
+};
+
 const DataProvider = ({ children }) => {
-
-  const initialState = {
-    isLaoding: false,
-    isError: false,
-    products: [],
-    featureProducts: [],
-    isSingleLoading: false,
-    singleProduct: {},
-  };
-
   const [state, dispatch] = useReducer(reducer, initialState);
-
 
   // ! TO GET ALL PRODUCTS DATA =========================================
   const getData = async (url) => {
@@ -34,16 +32,15 @@ const DataProvider = ({ children }) => {
 
   // ! TO GET SINGLE PRODUCT DATA =======================================
   const getSingleProduct = async (url) => {
-    dispatch({type: "SET_SINGLE_LOADING"});
+    dispatch({ type: "SET_SINGLE_LOADING" });
     try {
       const res = await axios.get(url);
       const singleProduct = await res.data;
-      dispatch({type: "SET_SINGLE_PRODUCT", payload: singleProduct});
+      dispatch({ type: "SET_SINGLE_PRODUCT", payload: singleProduct });
     } catch (error) {
-      dispatch({type: "SET_SINGLE_ERROR"});
+      dispatch({ type: "SET_SINGLE_ERROR" });
     }
   };
-
 
   useEffect(() => {
     getData(API);

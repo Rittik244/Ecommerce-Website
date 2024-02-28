@@ -4,7 +4,7 @@ const productReducer = (state, action) => {
       return {
         ...state,
         isLoading: true,
-        isError: false,
+        // isError: false,
       };
 
     case "SET_API_DATA":
@@ -26,25 +26,25 @@ const productReducer = (state, action) => {
         isError: true,
       };
 
-    case "SET_SINGLE_ERROR":
+    case "SET_SINGLE_LOADING":
       return {
         ...state,
         isSingleLoading: true,
-      }
-    
+      };
+
     case "SET_SINGLE_PRODUCT":
       return {
         ...state,
         isSingleLoading: false,
         singleProduct: action.payload,
-      }
+      };
 
     case "SET_SINGLE_ERROR":
-      return{
+      return {
         ...state,
         isSingleLoading: false,
         isError: true,
-      }
+      };
 
     default:
       return { ...state };
