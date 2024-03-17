@@ -24,16 +24,12 @@ const Hero = ({ myData }) => {
                 <FaAngleDoubleRight className="arrow-icon" />
               </NavLink>
             </div>
-            {/* <button>
-                            <spna className="text">Explore Store</spna>
-                            <FaAngleDoubleRight className='arrow-icon' />
-                        </button> */}
           </div>
           <div className="hero-section-image">
             <figure>
               <img
                 src="images/heroImg.png"
-                alt="hero-image"
+                alt="heroImage"
                 className="img-style"
               />
             </figure>
@@ -45,10 +41,10 @@ const Hero = ({ myData }) => {
 };
 
 const Wrapper = styled.section`
-  padding: 1rem;
+  padding: 8rem 1rem;
 
   .hero-section-data {
-    padding: 50px;
+    padding: 50px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,12 +53,14 @@ const Wrapper = styled.section`
     h1 {
       text-transform: uppercase;
       color: #415161;
+      font-size: 6rem;
     }
 
     h3 {
       color: #626e79;
       line-height: 30px;
       margin: 10px 0 60px;
+      font-size: 1.8rem;
     }
 
     a {
@@ -99,10 +97,57 @@ const Wrapper = styled.section`
     }
   }
 
+  .hero-section-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   img {
-    width: 100%;
-    /* min-width: 10rem;
-    height: 15rem; */
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.tab}) {
+    
+    .hero-section-data {
+      padding: 50px 0;
+      h1 {
+        font-size: 4rem;
+      }
+      h3{
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+    .grid {
+      gap: 5rem;
+    }
+
+    figure::after {
+      content: "";
+      width: 50%;
+      height: 100%;
+      left: 0;
+      top: 10%;
+      /* bottom: 10%; */
+      background-color: rgba(81, 56, 238, 0.4);
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.small_devices}) {
+    .container{
+      padding: 0 2rem;
+    }
+
+    .hero-section-data{
+      padding: 3rem 0;
+      h1{
+        font-size: 3.5rem;
+      }
+    }
   }
 `;
 

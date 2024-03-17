@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 
   .loading-spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #333;
+    border-left-color: #de3163;
     border-radius: 50%;
     width: 50px;
     height: 50px;

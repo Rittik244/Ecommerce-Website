@@ -12,15 +12,15 @@ import FormatPrice from "../Helper/FormatPrice";
 
 // ? ===========================================================================
 
+// ! we don't need {useDataContext} in this component, only imported because of {stars} and {reviews} object
+
+// const { singleProduct} = useDataContext();
+
+// const {stars, reviews} = singleProduct;
+// ? =========================================================================
+
 const Product = (ele) => {
   const { id, name, image, price, category, company } = ele;
-
-  // ? =========================================================================
-  // ! we don't need {useDataContext} in this component, only imported because of {stars} and {reviews} object
-  // const { singleProduct} = useDataContext();
-
-  // const {stars, reviews} = singleProduct;
-  // ? =========================================================================
 
   return (
     <Wrapper>
@@ -40,9 +40,9 @@ const Product = (ele) => {
               <FormatPrice price={price} />
             </h4>
           </div>
-          <span className="add-to-cart-container">
+          <button disabled className="add-to-cart-container">
             <FaCartShopping className="add-to-cart" />
-          </span>
+          </button>
         </div>
       </NavLink>
     </Wrapper>
@@ -144,6 +144,22 @@ const Wrapper = styled.div`
           height: 100%;
         }
       }
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.tab}) {
+    .pro-container .pro .caption {
+      right: 8%;
+      top: 7%;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+    .pro-container .pro .caption {
+      right: 6%;
+      top: 6%;
+      font-size: 1.2rem;
     }
   }
 `;

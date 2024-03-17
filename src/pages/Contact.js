@@ -1,8 +1,11 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import styled from "styled-components";
 
 const Contact = () => {
-  document.title = "Contact - EcomSite";
+  document.title = "Contact | Dream Designers";
+
+  const { isAuthenticated, user } = useAuth0();
 
   return (
     <Wrapper>
@@ -26,20 +29,25 @@ const Contact = () => {
             className=""
           >
             <input
+              className="contact-input name-input"
               type="text"
               placeholder="Username"
               name="Username"
+              value={isAuthenticated ? user.name : ""}
               required
               autoComplete="off"
             />
             <input
+              className="contact-input email-input"
               type="email"
               placeholder="Email"
               name="Email"
+              value={isAuthenticated ? user.email : ""}
               required
               autoComplete="off"
             />
             <textarea
+              className="contact-input msg-input"
               name="Message"
               placeholder="Enter your message"
               cols="30"
@@ -48,7 +56,7 @@ const Contact = () => {
               autoComplete="off"
             ></textarea>
 
-            <input type="submit" value="Send" />
+            <input className="submit" type="submit" value="Send" />
           </form>
         </div>
       </div>
@@ -74,6 +82,23 @@ const Wrapper = styled.section`
         display: flex;
         flex-direction: column;
         gap: 2rem;
+
+        input,
+        textarea {
+          text-transform: none;
+          font-size: 1.4rem;
+        }
+        
+        .submit {
+          transition: all 0.2s;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          background-color: #de3163;
+
+          &:hover {
+            background-color: #c21e56;
+          }
+        }
       }
     }
   }

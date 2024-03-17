@@ -2,6 +2,13 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 
+/* COLORS */
+/* 
+    BUTTON :- #de3163, #ee4b2b, #088178
+
+    HOVER  :- #c21e56, #d22b2b, 
+ */
+
 * {
     margin: 0;
     padding: 0;
@@ -63,11 +70,24 @@ h3 {
     font-weight: 400;
 }
   
-p, button {
+p {
     color: ${({ theme }) => theme.colors.text};
     font-size: 1.65rem;
     line-height: 1.5;
     font-weight:400;
+}
+
+.btn{
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 1.5rem 3rem;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: #088178;
+    color: #fff;
 }
   
 a {
@@ -137,7 +157,7 @@ li {
     text-transform: uppercase;
     background-color: ${({ theme }) => theme.colors.bg};
     color: ${({ theme }) => theme.colors.helper};
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 1.6rem;
     font-size: 1.2rem;
     border-radius: 2rem;
 }

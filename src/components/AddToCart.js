@@ -2,24 +2,25 @@ import React, { useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import styled from "styled-components";
 import { useDataContext } from "../context/ContextProvider";
-import Loading from "./Loading";
+import Loading from "../Helper/Loading";
 import CartCountToggle from "./CartCountToggle";
 import { NavLink } from "react-router-dom";
+import { useCartContext } from "../context/CartContext";
 
 const AddToCart = ({ product }) => {
   const { isLaoding } = useDataContext();
-
+  const { addToCart } = useCartContext();
   const { id, colors, stock } = product;
 
   const [color, setColor] = useState(colors[0]);
-  const [count, setCount] = useState(1);
+  const [amount, setAmount] = useState(1);
 
   const setDecrease = () => {
-    count > 1 ? setCount(count - 1) : setCount(1);
+    amount > 1 ? setAmount(amount - 1) : setAmount(1);
   };
 
   const setIncrease = () => {
-    count < stock ? setCount(count + 1) : setCount(stock);
+    amount < stock ? setAmount(amount + 1) : setAmount(stock);
   };
 
   if (isLaoding) {
@@ -46,12 +47,12 @@ const AddToCart = ({ product }) => {
         </p>
       </div>
       <CartCountToggle
-        count={count}
+        amount={amount}
         setDecrease={setDecrease}
         setIncrease={setIncrease}
       />
 
-      <NavLink to="/cart">
+      <NavLink to="/cart" onClick={() => addToCart(id, color, amount, product)}>
         <button className="cart-btn">Add to Cart</button>
       </NavLink>
     </Wrapper>
@@ -64,6 +65,7 @@ const Wrapper = styled.section`
     justify-content: flex-start;
     align-items: center;
   }
+
   .btnStyle {
     width: 2rem;
     height: 2rem;
@@ -87,39 +89,6 @@ const Wrapper = styled.section`
   .checkStyle {
     font-size: 1.4rem;
     color: #fff;
-  }
-
-  /* we can use it as a global one too  */
-  .count-toggle {
-    margin: 2rem 0;
-    margin-left: 0.2rem;
-    display: flex;
-    gap: 1.5rem;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 1.4rem;
-
-    button {
-      display: flex;
-      border-radius: 50%;
-      border: none;
-      background-color: #fff;
-      cursor: pointer;
-
-      &:active {
-        color: red;
-      }
-    }
-
-    .count-style {
-      border-radius: 50%;
-      font-size: 2rem;
-      font-weight: 600;
-      width: 20px;
-      height: 20px;
-      text-align: center;
-      color: #088178;
-    }
   }
 
   /* cart */

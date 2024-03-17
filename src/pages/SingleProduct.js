@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useDataContext } from "../context/ContextProvider";
 import styled from "styled-components";
 import { useEffect } from "react";
-import Loading from "../components/Loading";
+import Loading from "../Helper/Loading";
 import ProductImage from "../components/ProductImage";
 import FormatPrice from "../Helper/FormatPrice";
 import PageNavigation from "../components/PageNavigation";

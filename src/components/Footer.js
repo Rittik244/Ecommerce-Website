@@ -16,10 +16,10 @@ const Footer = () => {
       <div className="container">
         <div className="footer">
           <figure className="col img-container">
-            <h4>Dream Designers</h4>
             <Link to="/">
               <img src="./images/logo.png" alt="logo" />
             </Link>
+            <h4>Dream Designers</h4>
           </figure>
           <div className="col col1">
             <h4>Contact</h4>
@@ -28,25 +28,36 @@ const Footer = () => {
               <a
                 href="https://maps.app.goo.gl/XBH6HcCjrRwnW2sM9"
                 target="_blank"
+                rel="noopener noreferrer"
               >
-                OGI Boys Hostel, Bhopal - 462022
+                OGI Boys Hostel, Bhopal
               </a>
             </p>
             <p>
+              <strong>Pin Code : </strong>462022
+            </p>
+            <p>
               <strong>Email : </strong>
-              <a href="mailto:ritik.raghuwanshi244@gmail.com" target="_blank">
+              <a
+                href="mailto:ritik.raghuwanshi244@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 ritik.raghuwanshi244@gmail.com
               </a>
             </p>
             <p>
               <strong>Phone : </strong>
-              <a href="tel:9691244843" target="_blank">
+              <a
+                href="tel:9691244843"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 +91 9691244843
               </a>
             </p>
-            {/* <p><strong>Hours : </strong>10:00 am - 09:00 pm, Mon - Sat</p> */}
             <div className="social">
-              <h4>Social Media</h4>
+              <h4>follow us on...</h4>
               <div className="social-icons">
                 <Link to="#">
                   <FaInstagram className="icons" />
@@ -69,6 +80,8 @@ const Footer = () => {
               </div>
             </div>
           </div>
+
+          {/* column - 2 - ABOUT US */}
           <div className="col col2">
             <h4>About</h4>
             <p>
@@ -87,6 +100,8 @@ const Footer = () => {
               <Link to="/contact">Contact</Link>
             </p>
           </div>
+
+          {/* column - 3 - MY ACCOUNT */}
           <div className="col col3">
             <h4>My Account</h4>
             <p>
@@ -105,6 +120,8 @@ const Footer = () => {
               <Link to="#">Help</Link>
             </p>
           </div>
+
+          {/* column - 4 - INSTALL APP */}
           <div className="col col4">
             <h4>Install App</h4>
             <p>Apple store & Google play store</p>
@@ -117,8 +134,8 @@ const Footer = () => {
           </div>
           <div className="copyright">
             <p>
-              <FaRegCopyright className="cr-icon" /> 2024, All Rights Reserved
-              to Dream Designers
+              <FaRegCopyright className="cr-icon" />
+              <span>2024, All Rights Reserved to Dream Designers</span>
             </p>
           </div>
         </div>
@@ -128,7 +145,9 @@ const Footer = () => {
 };
 
 const Wrapper = styled.section`
-  margin: 5rem 0;
+  padding: 8rem 1rem;
+  background-color: ${({ theme }) => theme.colors.bg};
+  /* margin: 5rem 0; */
 
   .img-container {
     width: 100px;
@@ -139,14 +158,15 @@ const Wrapper = styled.section`
     }
 
     img {
-      width: 100%;
-      height: 100%;
+      width: 60px;
+      height: 60px;
+      margin: 2rem 0;
     }
   }
 
   .footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
 
     .col {
@@ -158,6 +178,7 @@ const Wrapper = styled.section`
       h4 {
         font-size: 14px;
         margin-bottom: 20px;
+        text-transform: capitalize;
       }
 
       p {
@@ -227,6 +248,49 @@ const Wrapper = styled.section`
           width: 13px;
           height: 13px;
         }
+      }
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.tab}) {
+    .footer {
+      justify-content: center;
+      gap: 10rem;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.small_devices}) {
+    .footer {
+      flex-direction: column;
+      gap: 5rem;
+
+      .img-container {
+        flex-direction: row;
+        align-items: center;
+        gap: 5rem;
+
+        h4 {
+          margin: 0 !important;
+          text-align: center;
+        }
+      }
+
+      .col {
+        margin: 0;
+
+        h4 {
+          font-size: 16px;
+          margin-bottom: 10px;
+        }
+
+        .social .social-icons {
+          gap: 2rem;
+        }
+      }
+
+      .copyright p .cr-icon {
+        width: 18px;
+        height: 18px;
       }
     }
   }

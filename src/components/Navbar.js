@@ -3,9 +3,15 @@ import { NavLink } from "react-router-dom";
 import { FaBagShopping } from "react-icons/fa6";
 import { CgMenu, CgClose } from "react-icons/cg";
 import styled from "styled-components";
+import { useCartContext } from "../context/CartContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
+  const { total_item } = useCartContext();
+
   const [menuIcon, setMenuIcon] = useState();
+
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   return (
     <Nav>
@@ -47,6 +53,7 @@ const Navbar = () => {
               Contact
             </NavLink>
           </li>
+
           <li>
             <NavLink
               to="/cart"
@@ -54,20 +61,38 @@ const Navbar = () => {
               onClick={() => setMenuIcon(false)}
             >
               <FaBagShopping className="cart-bag" />
-              <span className="cart-bag-count">10</span>
+              <span className="cart-bag-count">{total_item}</span>
             </NavLink>
           </li>
+          {isAuthenticated ? (
+            <li>
+              <button
+                className="btn"
+                onClick={() =>
+                  logout({ logoutParams: { returnTo: window.location.origin } })
+                }
+              >
+                Log Out
+              </button>
+            </li>
+          ) : (
+            <li>
+              <button className="btn" onClick={() => loginWithRedirect()}>
+                Log In
+              </button>
+            </li>
+          )}
         </ul>
 
         <div className="mobile-navbar-btn">
           <CgMenu
             name="menu-outline"
-            className="mobile-navbar-icon"
+            className="mobile-navbar-icon bar-icon"
             onClick={() => setMenuIcon(true)}
           />
           <CgClose
             name="close-outline"
-            className="mobile-navbar-icon close-outline"
+            className="mobile-navbar-icon cross-icon"
             onClick={() => setMenuIcon(false)}
           />
         </div>
@@ -77,6 +102,16 @@ const Navbar = () => {
 };
 
 const Nav = styled.nav`
+  .btn {
+    text-transform: uppercase;
+    padding: 1.2rem 2.5rem;
+    background-color: #de3163;
+
+    &:hover {
+      background-color: #c21e56;
+    }
+  }
+
   .navbar-lists {
     display: flex;
     gap: 1.8rem;
@@ -89,19 +124,15 @@ const Nav = styled.nav`
     }
 
     .navbar-link {
-      &:link,
-      &:visited {
-        font-size: 1.5rem;
-        text-transform: uppercase;
-        color: slategray;
-        transition: color 0.3s linear;
-        letter-spacing: 1px;
-      }
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      color: slategray;
+      transition: color 0.3s linear;
+      letter-spacing: 1px;
 
       .cart-bag {
-        /* color: #EE4B2B; */
-        width: 20px;
-        height: 20px;
+        width: 2rem;
+        height: 2rem;
       }
 
       .cart-bag-count {
@@ -111,7 +142,6 @@ const Nav = styled.nav`
         background-color: #ee4b2b;
         border-radius: 50%;
         font-size: 1.2rem;
-        font-weight: 600;
         display: grid;
         place-items: center;
         position: absolute;
@@ -121,7 +151,7 @@ const Nav = styled.nav`
 
       &:hover,
       &.active {
-        color: ${({ theme }) => theme.colors.links};
+        color: #ee4b2b;
       }
 
       &:hover::after,
@@ -173,91 +203,109 @@ const Nav = styled.nav`
   //   padding: 0.8rem 1.4rem;
   // }
 
+  @media (max-width: ${({ theme }) => theme.media.tab}) {
+    .navbar-lists {
+      gap: 1rem;
+    }
+    .btn {
+      padding: 1rem 1.5rem;
+    }
+  }
+
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
     .mobile-navbar-btn {
       display: inline-block;
       z-index: 9999;
       border: ${({ theme }) => theme.colors.black};
-      transition: all 3s linear;
 
       .mobile-navbar-icon {
-        font-size: 4.2rem;
-        color: ${({ theme }) => theme.colors.black};
-        transition: all 3s linear;
+        width: 4rem;
+        height: 4rem;
+        position: absolute;
+        top: 25%;
+        right: 5%;
+        color: rgba(29, 29, 29, 0.8);
       }
     }
 
-    .active .mobile-navbar-icon {
+    .active .bar-icon,
+    .cross-icon {
       display: none;
-      font-size: 4.2rem;
-      position: absolute;
-      top: 30%;
-      right: 5%;
-      color: ${({ theme }) => theme.colors.black};
       z-index: 9999;
-      transition: all 3s linear;
     }
 
-    .active .close-outline {
-      transition: all 3s linear;
+    .active .cross-icon {
       display: inline-block;
+      position: fixed;
+      top: 25px;
     }
 
-    .navbar-lists {
-      width: 80vw;
+    /* SIDE BAR NOT ACTIVE */
+    .navbar-lists:not(.active) {
+      width: 70vw;
       height: 100vh;
       position: absolute;
       top: 0;
-      left: 0;
-      /* background-color: #fff; */
-      background-color: thistle;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      right: -100%;
       flex-direction: column;
-
-      visibility: hidden;
       opacity: 0;
-      transform: translateX(100%);
-      /* transform-origin: top; */
-      transition: all 3s linear;
+      gap: 2.5rem;
+      background-color: rgba(225, 240, 250, 0.9);
+      transition: all 0.3s linear;
     }
 
+    /* SIDE BAR ACTIVE */
     .active .navbar-lists {
-      visibility: visible;
+      position: fixed;
       opacity: 1;
-      transform: translateX(0);
+      right: 0;
       z-index: 999;
-      transform-origin: right;
-      transition: all 3s linear;
+    }
 
+    /* WRAP CLASSES INSIDE "NAVBAR LISTS" */
+    .navbar-lists {
       .navbar-link {
-        font-size: 4.2rem;
-      }
-    }
-    .cart-bag-link {
-      position: relative;
+        font-size: 3rem;
 
-      .cart-bag {
-        width: 40px;
-        height: 40px;
+        &:hover::after,
+        &.active::after {
+          width: 100%;
+          left: 0;
+        }
+
+        @keyframes line {
+          0% {
+            width: 0%;
+          }
+
+          100% {
+            width: 100%;
+          }
+        }
+      }
+
+      .cart-bag-link {
         position: relative;
-        font-size: 5.2rem;
-      }
 
-      .cart-bag-count {
-        width: 4.2rem;
-        height: 4.2rem;
-        font-size: 2rem;
+        .cart-bag {
+          width: 3rem;
+          height: 3rem;
+          position: relative;
+        }
+
+        .cart-bag-count {
+          width: 2rem;
+          height: 2rem;
+          font-size: 1.4rem;
+          top: -35%;
+          left: 80%;
+        }
       }
     }
 
-    // .user-logout,
-    // .user-login {
-    //   font-size: 2.2rem;
-    //   padding: 0.8rem 1.4rem;
-    // }
+    .btn {
+      font-size: 2rem;
+    }
   }
 `;
 

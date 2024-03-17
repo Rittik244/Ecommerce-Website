@@ -3,9 +3,10 @@ import styled from "styled-components";
 import ProductFilterSection from "../components/ProductFilterSection";
 import ProductSorting from "../components/ProductSorting";
 import ProductsList from "../components/ProductsList";
+// import { useDataContext } from "../context/ContextProvider";
 
 const Products = () => {
-  document.title = "Products - EcomSite";
+  document.title = "Products | Dream Designers" 
 
   return (
     <Wrapper>
@@ -29,6 +30,12 @@ const Products = () => {
 const Wrapper = styled.section`
   .grid-filter-column {
     grid-template-columns: 0.2fr 1fr;
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.tab}) {
+    .grid-filter-column {
+      grid-template-columns: .4fr 1fr;
+    }
   }
 
   @media (max-width: ${({ theme }) => theme.media.mobile}) {

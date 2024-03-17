@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 const ErrorPage = () => {
-  document.title = "Error - EcomSite";
+  document.title = "Error | Dream Designers";
 
   return (
     <Wrapper>

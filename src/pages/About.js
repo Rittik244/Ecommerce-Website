@@ -1,7 +1,7 @@
 import Hero from "../components/Hero";
 
 const About = () => {
-  document.title = "About - EcomSite";
+  document.title = "About | Dream Designers";
 
   const data = {
     name: "Dream Designers",
